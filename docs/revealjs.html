@@ -10,7 +10,8 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.433">
 
-  <title>Emma Getz - Untitled</title>
+  <meta name="author" content="Emma Getz">
+  <title>Emma Getz - Combining Data Frames Questions 1-3</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -324,14 +325,35 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Untitled</h1>
+  <h1 class="title">Combining Data Frames Questions 1-3</h1>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Emma Getz 
+</div>
+</div>
 </div>
 
 </section>
-<section class="slide level2">
-
+<section id="question-1" class="slide level2">
+<h2>Question 1</h2>
+<p><strong>Question:</strong> “Take a look at the three data frames - <code>happy</code>, <code>happy_join_one</code>, and <code>happy_full</code> <strong>Answer:</strong> To learn more about these data frames, I used the <code>glimpse</code> function.</p>
+<p><code>glimpse(happy)</code></p>
+<p><code>glimpse(happy_join_one)</code></p>
+<p><code>glimpse(happy_full)</code></p>
+</section>
+<section id="question-2" class="slide level2">
+<h2>Question 2</h2>
+<p><strong>Question:</strong> Combine <code>happy</code> and <code>happy_join_one</code> by row. <strong>Answer:</strong> The function I used to combine <code>happy</code> and <code>happy_join_one</code> by row is as follows:</p>
+<p><code>bind_rows(happy, happy_join_one)</code></p>
+</section>
+<section id="question-3" class="slide level2">
+<h2>Question 3</h2>
+<p><strong>question:</strong> Combine <code>happy</code> and <code>happy_join_one</code> by column. <strong>answer:</strong> To answer this question, I first had to check if <code>happy</code> and <code>happy_join_one</code> had equal numbers of rows. I did this by using the function below:</p>
+<p><code>nrow(happy) == nrow(happy_join_one)</code></p>
+<p>Then, after finding that that function equals <code>TRUE</code> and that they do have the same numbers of rows, to combine <code>happy</code> and <code>happy_join_one</code> by columns I used the following function :</p>
+<p><code>bind_cols(happy, happy_join_one)</code></p>
 
 <div class="footer footer-default">
 

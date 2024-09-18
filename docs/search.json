@@ -19,5 +19,26 @@
     "title": "Quarto Web Demo",
     "section": "",
     "text": "This is the main landing page!\n\nTo learn more about geezers.\nTo learn more about Quarto websites."
+  },
+  {
+    "objectID": "revealjs.html#question-1",
+    "href": "revealjs.html#question-1",
+    "title": "Combining Data Frames Questions 1-3",
+    "section": "Question 1",
+    "text": "Question 1\nQuestion: “Take a look at the three data frames - happy, happy_join_one, and happy_full Answer: To learn more about these data frames, I used the glimpse function.\nglimpse(happy)\nglimpse(happy_join_one)\nglimpse(happy_full)"
+  },
+  {
+    "objectID": "revealjs.html#question-2",
+    "href": "revealjs.html#question-2",
+    "title": "Combining Data Frames Questions 1-3",
+    "section": "Question 2",
+    "text": "Question 2\nQuestion: Combine happy and happy_join_one by row. Answer: The function I used to combine happy and happy_join_one by row is as follows:\nbind_rows(happy, happy_join_one)"
+  },
+  {
+    "objectID": "revealjs.html#question-3",
+    "href": "revealjs.html#question-3",
+    "title": "Combining Data Frames Questions 1-3",
+    "section": "Question 3",
+    "text": "Question 3\nquestion: Combine happy and happy_join_one by column. answer: To answer this question, I first had to check if happy and happy_join_one had equal numbers of rows. I did this by using the function below:\nnrow(happy) == nrow(happy_join_one)\nThen, after finding that that function equals TRUE and that they do have the same numbers of rows, to combine happy and happy_join_one by columns I used the following function :\nbind_cols(happy, happy_join_one)"
   }
 ]
