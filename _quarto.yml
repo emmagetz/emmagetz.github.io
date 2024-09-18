@@ -17,7 +17,7 @@ website:
       - icon: twitter
         href: https://x.com
       - icon: linkedin
-        href: https://www.linkedin.com/
+        href: https://www.linkedin.com/in/emma-getz-7aa30821b
       - icon: github
         menu:
           - text: Source Code
@@ -27,7 +27,7 @@ website:
 
 format:
   html:
-    theme: sketchy  # flatly, litera, lumen, lux, minty, pulse, sandstone, zephyr, quartz, yeti, cosmo, sketchy
+    theme: morph  # flatly, litera, lumen, lux, minty, pulse, sandstone, zephyr, quartz, yeti, cosmo, sketchy
     css: styles.css
     toc: true
 
