@@ -1,10 +1,8 @@
 {
-  "hash": "c587dad5afa5d8b732f07b9b59d2742e",
+  "hash": "d4d66db1dffae85c521137ed8c710492",
   "result": {
-    "markdown": "---\ntitle: \"About Me\"\n---\n\n\nI am a senior at Appalachian State University majoring in public health with a minor in statistics. \n\n\n::: {.cell}\n::: {.cell-output-display}\n![](about_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
-    "supporting": [
-      "about_files"
-    ],
+    "markdown": "---\ntitle: \"About Me\"\n---\n\n\nSenior at Appalachian State University pursuing a B.S. in Public Health with a minor in Statistics. Departmental honors candidate and dedicated researcher passionate about the intersection of public health and data analytics. \n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

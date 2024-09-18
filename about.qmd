@@ -2,11 +2,11 @@
 title: "About Me"
 ---
 
-I am a senior at Appalachian State University majoring in public health with a minor in statistics. 
+Senior at Appalachian State University pursuing a B.S. in Public Health with a minor in Statistics. Departmental honors candidate and dedicated researcher passionate about the intersection of public health and data analytics. 
+
+
 
 ```{r}
-#| echo: false
-set.seed(123)
-hist(rnorm(10000), col = "purple", main = "Purple Histogram", xlab = "")
+
 ```
 
