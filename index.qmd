@@ -2,7 +2,7 @@
 title: "Welcome to my website!"
 ---
 
-![Emma](./photos/picofemma.jpg){width=100}
+![Emma](./photos/picofemma.jpg){width=150}
 
 
 
@@ -11,4 +11,4 @@ title: "Welcome to my website!"
 * To learn more about [Public Health](https://www.appstate.edu/academics/majors/id/public-health).
 
 
-![BCHS](./photos/bchslogo.png){width=300}
+![BCHS](./photos/bchslogo.png){width=500}
