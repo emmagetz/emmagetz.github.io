@@ -4,8 +4,8 @@ title: "Welcome to my website!"
 
 This is the main landing page!
 
-* To learn more about []().
+* To learn more about [Appalachian State University](https://www.appstate.edu/).
 
-* To learn more about []().
+* To learn more about [Public Health](https://www.appstate.edu/academics/majors/id/public-health).
 
 
