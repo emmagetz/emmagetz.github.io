@@ -5,4 +5,3 @@ title: "Projects"
 * [Combining Data Frames Questions 1-3](./presentations/revealjs.qmd)
 * [The Appalachian Portfolio](https://theappalachianonline.com/staff_name/emma-getz/)
 * [My Small Business - EmmaLinaLino](https://www.instagram.com/emmalinalino/)
-* 
