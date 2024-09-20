@@ -1,8 +1,10 @@
 {
-  "hash": "d4d66db1dffae85c521137ed8c710492",
+  "hash": "4a9a73a445109f2abcb721cb22c2a356",
   "result": {
-    "markdown": "---\ntitle: \"About Me\"\n---\n\n\nSenior at Appalachian State University pursuing a B.S. in Public Health with a minor in Statistics. Departmental honors candidate and dedicated researcher passionate about the intersection of public health and data analytics. \n\n\n\n\n::: {.cell}\n\n:::\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"About Me\"\n---\n\n\nI am a senior at Appalachian State University pursuing a B.S. in Public Health with a minor in Statistics. Departmental honors candidate and dedicated researcher passionate about the intersection of public health and data analytics. \n\n* [My Resume](https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:347e832d-d032-3f14-8d3c-92a1e5df4d62)\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "about_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

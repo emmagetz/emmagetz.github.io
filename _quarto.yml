@@ -12,13 +12,13 @@ website:
       - project.qmd
     
     tools:
-      - icon: trash
-        href: https://www.mountainproject.com/area/112001458/the-dump
-      - icon: twitter
-        href: https://x.com
+      - icon: 
+        href: 
+      - icon: 
+        href: 
       - icon: linkedin
         href: https://www.linkedin.com/in/emma-getz-7aa30821b
-      - icon: github
+    
         menu:
           - text: Source Code
             href: https://github.com
