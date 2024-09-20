@@ -1,0 +1,14 @@
+{
+  "hash": "76fea9e95709327ea9d8c34ef92caf9f",
+  "result": {
+    "markdown": "---\ntitle: \"Recources\"\n---\n\nCheck out these interesting resources related to public health. \n\n* [CDC](https://www.cdc.gov/index.html)\n\n* [WHO](https://www.who.int/)\n\n* [American Public Health Association](https://www.apha.org/)\n\n* [Appalachian Trail Conservancy - Health!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/health/)\n\n* [Appalachian Trail Conservancy - Ticks!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/safety/ticks/)\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

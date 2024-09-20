@@ -1,0 +1,19 @@
+---
+title: "Recources"
+---
+Check out these interesting resources related to public health. 
+
+* [CDC](https://www.cdc.gov/index.html)
+
+* [WHO](https://www.who.int/)
+
+* [American Public Health Association](https://www.apha.org/)
+
+* [Appalachian Trail Conservancy - Health!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/health/)
+
+* [Appalachian Trail Conservancy - Ticks!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/safety/ticks/)
+
+```{r}
+
+```
+

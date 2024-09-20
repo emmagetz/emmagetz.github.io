@@ -2,7 +2,7 @@
 title: "About Me"
 ---
 
-I am a senior at Appalachian State University pursuing a B.S. in Public Health with a minor in Statistics. Departmental honors candidate and dedicated researcher passionate about the intersection of public health and data analytics. 
+I am in my senior year at Appalachian State University pursuing a B.S. in Public Health with a minor in Statistics. I am also a departmental honors candidate and dedicated researcher passionate about the intersection of public health and data analytics. 
 
 * [My Resume](https://acrobat.adobe.com/link/review?uri=urn:aaid:scds:US:347e832d-d032-3f14-8d3c-92a1e5df4d62)
 
