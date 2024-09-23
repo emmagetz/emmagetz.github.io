@@ -15,14 +15,14 @@ website:
     tools:
       - icon: 
         href: 
-      - icon: 
-        href: 
+      - icon: github
+        href: https://github.com/emmagetz/emmagetz.github.io
       - icon: linkedin
         href: https://www.linkedin.com/in/emma-getz-7aa30821b
     
         menu:
           - text: Source Code
-            href: https://github.com
+            href: https://github.com/emmagetz
           - text: Report a Bug
             href: https://github.com  
 
