@@ -31,15 +31,17 @@ To guide my analysis, I developed research questions aimed at understanding the 
 
 Question 1: In 2021, which countries had the highest and lowest maternal mortality rates? 
 
-Question 2: In 2021, was there a relationship between a country's Human Development Index rating and its maternal mortality ratio?
+Question 2: In 2021, which UNDP Developing Regions had the highest maternal mortality rates? 
 
-Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?
+Question 3: In 2021, was there a relationship between a country's Human Development Index rating and its maternal mortality ratio?
 
-Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?
+Question 4: How do maternal mortality rates vary across continents, and how have these variations changed over time?
 
-Question 5: How has the maternal mortality rate in the United States changed across time? 
+Question 5: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?
 
-Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?
+Question 6: How has the maternal mortality rate in the United States changed across time? 
+
+Question 7: How does the maternal mortality rate over time in the United States compare to that of other highly developed countries?
 
 Question 7: What was the global maternal mortality rate in 2021? How has this rate changed since 1990? 
 
@@ -295,20 +297,36 @@ ggplot(lowest_MMR_countries_2021, aes(x = Country, y = MMR)) +
 ```
 The countries with the highest MMR in 2021 were South Sudan, Chad, Sierra Leone, Nigeria, and the Central African Republic. South Sudan was the highest, with Chad following close behind. The countries with the lowest MMR in 2021 were Belarus, Italy, Norway, Poland, and the United Arab Emirates. Belarus, Italy, Norway, and Poland were tied for lowest, all with a MMR of 2. 
 
-### Research Question 2: In 2021, was there a coorelation between a country's Human Development Index rating and its maternal mortality ratio? 
+### Research Question 2: In 2021, which UNDP Developing Regions had the highest and lowest maternal mortality rates? 
+
+```{r echo = FALSE}
+maternalmortality_long_2021_UNDP <- maternalmortality_long_2021 %>%
+  filter(!is.na(UNDP.Developing.Regions) & UNDP.Developing.Regions != "")
+
+ggplot(maternalmortality_long_2021_UNDP, aes(x = UNDP.Developing.Regions, y = MMR)) +
+  geom_boxplot() +
+  labs(title = "2021 Maternal Mortality Ratios by UNDP Developing Regions",
+       x = "UNDP Developing Regions",
+       y = "Maternal Mortality Rate (per 100 000 live births)") +
+  theme_bw() 
+```
+
+These box plots indicate that Sub-Saharan Africa (SSA) has the highest rates of maternal mortality out of the UNDP Developing Regions. Europe and Central Asia (ECA) have the lowest rates of maternal mortality out of these regions. This indicates significant disparities between maternal health outcomes, even among different developing regions. This also aligns with the findings from research question #1, as all of the countries with the highest MMR in 2021 are located in Sub-Saharan Africa. 
+
+### Research Question 3: In 2021, was there a coorelation between a country's Human Development Index rating and its maternal mortality ratio? 
 
 ```{r echo = FALSE}
 ggplot(maternalmortality_long_2021, aes(x = HDI_2021, y = MMR)) +
   geom_point() + 
   geom_smooth(method = "loess", se = FALSE) +
   labs(title = "2021 Maternal Mortality Rate vs. Human Development Index Rank",
-    x = "2021 Human Development Index Rank",
-    y = "2021 Maternal Mortality Rate (per 100 000 live births)",) +
+    x = "Human Development Index Rank",
+    y = "Maternal Mortality Rate (per 100 000 live births)") +
   theme_bw()
 ```
 This graph shows that there is a positive coorelation between a country's Human Development Index rank and Maternal Mortality Rate in 2021. Specifically, the trend shoes that as a HDI rank increases (indicating less development), MMR also gets higher. The line of best fit emphasizes this trend, suggesting that less developed countries face a higher burden of maternal mortality.
 
-### Research Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?
+### Research Question 4: How do maternal mortality rates vary across continents, and how have these variations changed over time?
 
 ```{r echo = FALSE}
 continent_averages <- maternalmortality_long %>%
@@ -328,7 +346,7 @@ This graph shows a correlation between continents and maternal mortality rates. 
 
 Over time, all continents show a downward trend in maternal mortality rates. Africa's MMR has significantly decreased and Europe's MMR has slowly decreased. The Americas, Asia, and Oceania have all also experienced a steady decrease in MMR. All continents have seen a leveling-off in recent years.
 
-### Research Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?
+### Research Question 5: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?
 
 ```{r echo = FALSE}
 HDG_averages <- maternalmortality_long %>%
@@ -353,7 +371,7 @@ This graph shows that there is a clear correlation between a country's maternal 
 
 The graph shows an overall downward trend in maternal mortality rates over time across all Human Development Groups. There are variations in the levels of change between HDG's. While the "Very High" and "High" groups stay generally stable with a slow decrease. The "Medium" group sees a larger rate of decline, and the "Low" group sees the largest rate of decline. The most significant changes, observed in the "Low" group, show a decrease in maternal mortality rates by approximately 500 from 1990 to 2021. Additionally, all HDG groups see a leveling off towards the end of the time period.
 
-### Question 5: How has the maternal mortality rate in the United States changed over time?
+### Research Question 6: How has the maternal mortality rate in the United States changed over time?
 
 ```{r echo = FALSE}
 maternalmortality_US <- maternalmortality_long %>% 
@@ -372,12 +390,44 @@ ggplot(maternalmortality_US, aes(x = Year, y = MMR)) +
 
 This graph shows that since 1990, the maternal mortality rate in the United States has been increasing. It started at 11 in 1990 and by 2016, it had increased to 19, which is where it stayed until 2021. 
 
-### Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?
+### Research Question 7: How does the maternal mortality rate over time in the United States compare to that of other highly developed countries? 
 
-```{r}
+```{r echo = FALSE}
+maternalmortality_veryhigh_excluding_US <- maternalmortality_long %>%
+  filter(Human.Development.Groups == "Very High" & Country != "United States") %>%
+  group_by(Year) %>%
+  summarize(average_veryhigh_MMR = mean(MMR, na.rm = TRUE))
+
+veryhigh_excluding_US_joined_with_US <- maternalmortality_veryhigh_excluding_US %>%
+  left_join(maternalmortality_US, by = "Year")
+
+ggplot(veryhigh_excluding_US_joined_with_US, aes(x = Year)) +
+  geom_line(aes(y = average_veryhigh_MMR, color = "Avg. MMR - Very High HDG (excl. US)"), size = 1) +
+  geom_line(aes(y = MMR, color = "US MMR"), size = 1) +
+  scale_color_manual(values = c("Avg. MMR - Very High HDG (excl. US)" = "blue", "US MMR" = "red")) +
+  labs(
+    title = "Maternal Mortality Rate (1990–2021): US vs. 'Very High' HDG Countries",
+    y = "Maternal Mortality Rate (per 100 000 live births)",
+    color = "Legend"
+  ) +
+  scale_y_continuous(breaks = 11:29) +
+  theme_bw()
 
 ```
 
+This graph shows that the maternal mortality rate in the United States is very different from the MMR of other countries in the "Very High" human development group. 
+
+The red line representing the United States' MMR shows a clear upward trend; starting at 11 in 1990 and ending at 19 in 2021. The blue line representing the other 'Very High' HDG countries shows a clear downward trend since 1990, starting at 28.5 in 1990 and ending at 14 in 2021. 
+
+So, in 2021, The U.S MMR is significantly higher than the MMR of other highly developed countries. The lines cross in the early 2010s, marking the point at which the U.S. maternal mortality rate surpasses that of other 'Very High' HDG countries. The different trends in the data are interesting and suggest that while other highly developed countries are improving their maternal health outcomes, the United States has been moving in the opposite direction. 
+
+# Conclusion
+
+In conclusion, the data analysis and visualizations created in this project provide valuable insights into the global disparities in maternal mortality rates (MMR). There are clear geographical and developmental differences between countries and regions when it comes to maternal mortality. Sub-Saharan Africa bears the greatest burden of maternal mortality in the world, with all 5 countries with the highest MMR being located there. European countries have some of the lowest maternal mortality rates, with four out of five of the countries with the lowest MMR located in this region. 
+
+Additionally, the positive correlation between a country's Human Development Index (HDI) and MMR suggests that less developed countries face a higher burden of maternal mortality. This trend is evident when comparing countries across HDI groups, with the least developed countries showing the highest MMR. This analysis also found that over time, maternal mortality rates have been decreasing, with the most rapid declines taking place in the African continent and in countries with the lowest human development. The United States displays a unique and alarming trend of increasing maternal mortality over time, in contrast to the general decline observed in other highly developed nations. 
+
+Overall, this analysis provides crucial insight into the state of maternal health systems around the world. This is important to public health as it highlights disparities, clearly identifying areas with the worst maternal health outcomes. These disparities should be addressed through further research and targeted interventions aimed at lowering maternal mortality rates and improving maternal health outcomes in the countries and regions that need it most. 
 
 # References 
 
