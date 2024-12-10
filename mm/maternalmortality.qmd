@@ -1,0 +1,399 @@
+---
+title: "Analyzing Global Trends in Maternal Mortality"
+date: last-modified
+date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
+format: 
+  html:
+    theme: pulse 
+author:
+  - name: Emma Getz
+    email: getzeg@appstate.edu
+    affiliation:
+      - name: Appalachian State University
+        city: Boone
+        state: NC  
+        url: https://www.appstate.edu/
+abstract: >
+  This analysis examines maternal mortality data from 1990 to 2021. 
+---
+# Background
+According to the [World Health Organization](https://www.who.int/news-room/fact-sheets/detail/maternal-mortality), maternal mortality refers to deaths due to complications during pregnancy and childbirth. Maternal mortality rate (the number of maternal deaths per 100,000 live births) is a critical indicator of the strength of a country's healthcare system. High maternal mortality rates are often due to disparities in access to quality healthcare, particularly in low- and middle-income countries. Reducing maternal mortality is essential for improving women's health. It's critical to understand trends in maternal mortality data globally to identify disparities, understand trends, and inform future public health research and policy.
+
+```{r}
+#| label: "setup"
+#| include: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = NA, fig.align = "center")
+```
+
+# Research Questions
+
+To guide my analysis, I developed research questions aimed at understanding the trends and factors behind maternal mortality rates across different countries and years. 
+
+Question 1: In 2021, which countries had the highest and lowest maternal mortality rates? 
+
+Question 2: In 2021, was there a relationship between a country's Human Development Index rating and its maternal mortality ratio?
+
+Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?
+
+Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?
+
+Question 5: How has the maternal mortality rate in the United States changed across time? 
+
+Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?
+
+Question 7: What was the global maternal mortality rate in 2021? How has this rate changed since 1990? 
+
+Let's get started!
+
+# Loading Necessary Packages
+
+```{r}
+# For data manipulation and tidying
+library(dplyr)
+library(stringr)
+library(tidyr)
+
+# For data visualizations
+library(ggplot2)
+```
+
+# Importing Data
+
+The data for this project was downloaded from [Kaggle](https://www.kaggle.com/datasets/iamsouravbanerjee/maternal-mortality-dataset/data). This project contains one data set which was imported and inspected using the `read.csv()` function.
+
+```{r}
+maternalmortality <- read.csv(file = "MaternalMortalityCSV.csv",
+                    header = TRUE,
+                    stringsAsFactors = FALSE)
+```
+
+# Data Structure and Variables
+
+Let's take a look at the dataset. 
+
+```{r}
+#| echo: false
+glimpse(maternalmortality)
+```
+The `maternalmortality` dataframe contains 39 variables (columns) and 195 observations (rows), where each row corresponds to a country.
+
+The 39 variables are: 
+
+1. `ISO3`: The three-letter country code from [ISO 3166](https://www.iso.org/iso-3166-country-codes.html), the international standard for country codes. 
+
+2. `Country`: The name of the Country/Territory.
+
+3. `Continent`: The Continent where the Country/Territory is located.
+
+4. `Hemisphere`: The Hemisphere (Northern or Southern) where the Country/Territory is located.
+
+5. `Human.Development.Groups`: The [Human Development Index (HDI)](https://worldpopulationreview.com/country-rankings/hdi-by-country) is a measure compiled by the United Nations Development Programme to assess a country's average achievements in health, education, and standard of living. In this dataset, countries are categorized into four tiers based on their HDI: Very High, High, Medium, and Low.
+
+6. `UNDP.Developing.Regions`: The classification of countries into developing regions by the [United Nations Development Programme (UNDP)](https://www.undp.org/). These regions include East Asia and Pacific (EAP), Europe and Central Asia (ECA), Latin America and the Caribbean (LAC), Middle East and North Africa (MNA), South Asia (SAS), and Sub-Saharan Africa (SSA).
+
+7. `HDI.Rank..2021`: The ranking of countries based on their [Human Development Index (HDI)](https://hdr.undp.org/data-center/human-development-index#/indicies/HDI) values, with 1 being the highest-ranked country. This rank reflects a country's relative position in terms of human development compared to others.
+
+8. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1990`: The maternal mortality ratio (MMR) in 1990, measured as the number of maternal deaths per 100,000 live births.
+
+9. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1991`: The maternal mortality ratio (MMR) in 1991, measured as the number of maternal deaths per 100,000 live births.
+
+10. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1992`: The maternal mortality ratio (MMR) in 1992, measured as the number of maternal deaths per 100,000 live births.
+
+11. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1993`: The maternal mortality ratio (MMR) in 1993, measured as the number of maternal deaths per 100,000 live births.
+
+12. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1994`: The maternal mortality ratio (MMR) in 1994, measured as the number of maternal deaths per 100,000 live births.
+
+13. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1995`: The maternal mortality ratio (MMR) in 1995, measured as the number of maternal deaths per 100,000 live births.
+
+14. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1996`: The maternal mortality ratio (MMR) in 1996, measured as the number of maternal deaths per 100,000 live births.
+
+15. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1997`: The maternal mortality ratio (MMR) in 1997, measured as the number of maternal deaths per 100,000 live births.
+
+16. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1998`: The maternal mortality ratio (MMR) in 1998, measured as the number of maternal deaths per 100,000 live births.
+
+17. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1999`: The maternal mortality ratio (MMR) in 1999, measured as the number of maternal deaths per 100,000 live births.
+
+18. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2000`: The maternal mortality ratio (MMR) in 2000, measured as the number of maternal deaths per 100,000 live births.
+
+19. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2001`: The maternal mortality ratio (MMR) in 2001, measured as the number of maternal deaths per 100,000 live births.
+
+20. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2002`: The maternal mortality ratio (MMR) in 2002, measured as the number of maternal deaths per 100,000 live births.
+
+21. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2003`: The maternal mortality ratio (MMR) in 2003, measured as the number of maternal deaths per 100,000 live births.
+
+22. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2004`: The maternal mortality ratio (MMR) in 2004, measured as the number of maternal deaths per 100,000 live births.
+
+23. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2005`: The maternal mortality ratio (MMR) in 2005, measured as the number of maternal deaths per 100,000 live births.
+
+24. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2006`: The maternal mortality ratio (MMR) in 2006, measured as the number of maternal deaths per 100,000 live births.
+
+25. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2007`: The maternal mortality ratio (MMR) in 2007, measured as the number of maternal deaths per 100,000 live births.
+
+26. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2008`: The maternal mortality ratio (MMR) in 2008, measured as the number of maternal deaths per 100,000 live births.
+
+27. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2009`: The maternal mortality ratio (MMR) in 2009, measured as the number of maternal deaths per 100,000 live births.
+
+28. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2010`: The maternal mortality ratio (MMR) in 2010, measured as the number of maternal deaths per 100,000 live births.
+
+29. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2011`: The maternal mortality ratio (MMR) in 2011, measured as the number of maternal deaths per 100,000 live births.
+
+30. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2012`: The maternal mortality ratio (MMR) in 2012, measured as the number of maternal deaths per 100,000 live births.
+
+31. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2013`: The maternal mortality ratio (MMR) in 2013, measured as the number of maternal deaths per 100,000 live births.
+
+32. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2014`: The maternal mortality ratio (MMR) in 2014, measured as the number of maternal deaths per 100,000 live births.
+
+33. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2015`: The maternal mortality ratio (MMR) in 2015, measured as the number of maternal deaths per 100,000 live births.
+
+34. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2016`: The maternal mortality ratio (MMR) in 2016, measured as the number of maternal deaths per 100,000 live births.
+
+35. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2017`: The maternal mortality ratio (MMR) in 2017, measured as the number of maternal deaths per 100,000 live births.
+
+36. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2018`: The maternal mortality ratio (MMR) in 2018, measured as the number of maternal deaths per 100,000 live births.
+
+37. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2019`: The maternal mortality ratio (MMR) in 2019, measured as the number of maternal deaths per 100,000 live births.
+
+38. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2020`: The maternal mortality ratio (MMR) in 2020, measured as the number of maternal deaths per 100,000 live births.
+
+39. `Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2021`: The maternal mortality ratio (MMR) in 2021, measured as the number of maternal deaths per 100,000 live births.
+
+# Tidying Data
+
+After exploring the dataset and its variables, I want to tidy the data by renaming some of the columns and restructuring the dataframe. 
+
+### Renaming Variables
+
+The purpose of renaming variables is to make the dataset more understandable and easier to work wth. After doing this, I will view the updated column names.
+
+```{r}
+
+colnames(maternalmortality)[colnames(maternalmortality) == "UNDP.Developeing.Regions"] <- "UNDP.Developing.Regions"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "HDI.Rank..2021."] <- "HDI_2021"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1990."] <- "MMR_1990"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1991."] <- "MMR_1991"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1992."] <- "MMR_1992"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1993."] <- "MMR_1993"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1994."] <- "MMR_1994"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1995."] <- "MMR_1995"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1996."] <- "MMR_1996"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1997."] <- "MMR_1997"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1998."] <- "MMR_1998"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1999."] <- "MMR_1999"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2000."] <- "MMR_2000"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2001."] <- "MMR_2001"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2002."] <- "MMR_2002"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2003."] <- "MMR_2003"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2004."] <- "MMR_2004"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2005."] <- "MMR_2005"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2006."] <- "MMR_2006"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2007."] <- "MMR_2007"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2008."] <- "MMR_2008"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2009."] <- "MMR_2009"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2010."] <- "MMR_2010"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2011."] <- "MMR_2011"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2012."] <- "MMR_2012"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2013."] <- "MMR_2013"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2014."] <- "MMR_2014"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2015."] <- "MMR_2015"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2016."] <- "MMR_2016"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2017."] <- "MMR_2017"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2018."] <- "MMR_2018"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2019."] <- "MMR_2019"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2020."] <- "MMR_2020"
+
+colnames(maternalmortality)[colnames(maternalmortality) == "Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2021."] <- "MMR_2021"
+
+colnames(maternalmortality)
+```
+
+### Reshaping Data 
+
+Instead of having one entry per country with separate columns for each year, I want to transform the dataset to have one entry per country per year. This will make it easier to analyze relationships in the data and create visualizations. I will do this by changing the dataframe from "wide format" to "long format" using the `pivot_longer()` function from the `tidyr` package. I will also convert `Year` to a numeric variable using `str_extract()` from `stringr` package and `mutate()` from the `dplyr` package. 
+
+```{r}
+maternalmortality_long <- maternalmortality %>%
+  pivot_longer(
+    cols = starts_with("MMR_"), 
+    names_to = "Year",
+    values_to = "MMR")
+maternalmortality_long <- maternalmortality_long %>%
+  mutate(Year = as.numeric(str_extract(Year, "\\d{4}")))
+```
+
+Let's view the restructured dataframe. 
+
+```{r}
+glimpse(maternalmortality_long)
+```
+
+Great! Now I'm ready to begin analyzing the data and answering my research questions. 
+
+# Data Analysis 
+
+### Research Question 1: In 2021, which countries had the highest and lowest maternal mortality rates? 
+
+```{r}
+maternalmortality_long_2021 <- maternalmortality_long %>% filter(Year == 2021)
+highest_MMR_countries_2021 <- maternalmortality_long_2021 %>%
+  arrange(desc(MMR)) %>%
+  slice(1:5)
+print(highest_MMR_countries_2021)
+```
+This shows us that South Sudan, Chad, Sierra Leone, Nigeria, and the Central African Republic had the highest MMR in 2021. Below is a bar chart showing these countries and their corresponding MMR values.
+
+```{r echo = FALSE}
+ggplot(highest_MMR_countries_2021, aes(x = Country, y = MMR)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Top 5 Countries With the Highest Maternal Mortality Rates in 2021", y = "Maternal Mortality Rate (per 100 000 live births)") +
+  theme_bw()
+```
+```{r}
+lowest_MMR_countries_2021 <- maternalmortality_long_2021 %>%
+  arrange(MMR) %>%
+  slice(1:5)
+print(lowest_MMR_countries_2021)
+```
+This shows us that Belarus, Italy, Norway, Poland, and the United Arab Emirates had the lowest MMR in 2021. Below is a bar chart showing these countries and their corresponding MMR values.
+
+```{r echo = FALSE}
+ggplot(lowest_MMR_countries_2021, aes(x = Country, y = MMR)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Top 5 Countries With the Lowest Maternal Mortality Rates in 2021", y = "Maternal Mortality Rate (per 100 000 live births)") +
+  theme_bw()
+```
+The countries with the highest MMR in 2021 were South Sudan, Chad, Sierra Leone, Nigeria, and the Central African Republic. South Sudan was the highest, with Chad following close behind. The countries with the lowest MMR in 2021 were Belarus, Italy, Norway, Poland, and the United Arab Emirates. Belarus, Italy, Norway, and Poland were tied for lowest, all with a MMR of 2. 
+
+### Research Question 2: In 2021, was there a coorelation between a country's Human Development Index rating and its maternal mortality ratio? 
+
+```{r echo = FALSE}
+ggplot(maternalmortality_long_2021, aes(x = HDI_2021, y = MMR)) +
+  geom_point() + 
+  geom_smooth(method = "loess", se = FALSE) +
+  labs(title = "2021 Maternal Mortality Rate vs. Human Development Index Rank",
+    x = "2021 Human Development Index Rank",
+    y = "2021 Maternal Mortality Rate (per 100 000 live births)",) +
+  theme_bw()
+```
+This graph shows that there is a positive coorelation between a country's Human Development Index rank and Maternal Mortality Rate in 2021. Specifically, the trend shoes that as a HDI rank increases (indicating less development), MMR also gets higher. The line of best fit emphasizes this trend, suggesting that less developed countries face a higher burden of maternal mortality.
+
+### Research Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?
+
+```{r echo = FALSE}
+continent_averages <- maternalmortality_long %>%
+  group_by(Continent, Year) %>%
+  summarize(Avg_MMR = mean(MMR, na.rm = TRUE))
+ggplot(continent_averages, aes(x = Year, y = Avg_MMR, color = Continent)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Maternal Mortality from 1990 to 2021 by Continent",
+    x = "Year",
+    y = "Average Maternal Mortality Rate (per 100 000 live births)",
+    color = "Continent") + 
+  theme_bw()
+```
+
+This graph shows a correlation between continents and maternal mortality rates. Africa consistently has the highest MMR throughout the time period, while Europe consistently maintains the lowest. The other continents (America, Asia, and Oceania) fall in the mid-range, with their MMRs fluctuating but generally remaining lower than Africa's and higher than Europe's.
+
+Over time, all continents show a downward trend in maternal mortality rates. Africa's MMR has significantly decreased and Europe's MMR has slowly decreased. The Americas, Asia, and Oceania have all also experienced a steady decrease in MMR. All continents have seen a leveling-off in recent years.
+
+### Research Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?
+
+```{r echo = FALSE}
+HDG_averages <- maternalmortality_long %>%
+  filter(Human.Development.Groups != "") %>%
+  group_by(Human.Development.Groups, Year) %>%
+  summarize(Avg_MMR = mean(MMR, na.rm = TRUE))
+
+ggplot(HDG_averages, aes(x = Year, y = Avg_MMR, color = Human.Development.Groups)) +
+  geom_line(size = 1) +
+  scale_color_manual(
+    values = c("Very High" = "green", "High" = "yellow", "Medium" = "orange", "Low" = "red"),
+    breaks = c("Very High", "High", "Medium", "Low")) +
+  labs(title = "Maternal Mortality from 1990 to 2021 by Human Development Groups",
+    x = "Year",
+    y = "Average Maternal Mortality Rate (per 100 000 live births)",
+    color = "Human Development Groups"
+  ) + 
+  theme_bw()
+```
+
+This graph shows that there is a clear correlation between a country's maternal mortality rate and the Human Development Group it's in. Countries in the "Very High" HDG maintain the lowest rates for the whole time period, followed by countries in the "High" HDG. Countries in the "Low" HDG show the highest MMR's over the whole time period, followed  by countries in the "Medium" HDG. These results suggest that countries with higher levels of development tend to have lower maternal mortality rates and less developed countries tend to have higher maternal mortality rates.
+
+The graph shows an overall downward trend in maternal mortality rates over time across all Human Development Groups. There are variations in the levels of change between HDG's. While the "Very High" and "High" groups stay generally stable with a slow decrease. The "Medium" group sees a larger rate of decline, and the "Low" group sees the largest rate of decline. The most significant changes, observed in the "Low" group, show a decrease in maternal mortality rates by approximately 500 from 1990 to 2021. Additionally, all HDG groups see a leveling off towards the end of the time period.
+
+### Question 5: How has the maternal mortality rate in the United States changed over time?
+
+```{r echo = FALSE}
+maternalmortality_US <- maternalmortality_long %>% 
+  filter(Country == "United States")
+
+ggplot(maternalmortality_US, aes(x = Year, y = MMR)) +
+  geom_point() +
+  geom_line() + 
+  labs(
+    title = "Maternal Mortality Rate in the United States from 1990 to 2021", 
+    x = "Year", 
+    y = "Maternal Mortality Rate (per 100 000 live births)") +
+  scale_y_continuous(breaks = 11:20) +
+  theme_bw()
+```
+
+This graph shows that since 1990, the maternal mortality rate in the United States has been increasing. It started at 11 in 1990 and by 2016, it had increased to 19, which is where it stayed until 2021. 
+
+### Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?
+
+```{r}
+
+```
+
+
+# References 
+
+https://argoshare.is.ed.ac.uk/healthyr_book/reshaping-data-long-vs-wide-format.html
+
+https://quarto.org/docs/authoring/markdown-basics.html
+
+https://www.who.int/news-room/fact-sheets/detail/maternal-mortality
+
+https://www.iso.org/iso-3166-country-codes.html
+
+https://worldpopulationreview.com/country-rankings/hdi-by-country
+
+https://www.undp.org/
+
+https://hdr.undp.org/data-center/human-development-index#/indicies/HDI
+
+https://ggplot2.tidyverse.org/reference/ggtheme.html
+

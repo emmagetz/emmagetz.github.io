@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Emma Getz">
+
+<title>Emma Getz - Analyzing Global Trends in Maternal Mortality</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Emma Getz</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html" rel="" target="">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resources.html" rel="" target="">
+ <span class="menu-text">Recources</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto tools-wide">
+    <a href="" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-"></i></a>
+    <a href="https://github.com/emmagetz/emmagetz.github.io" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="https://www.linkedin.com/in/emma-getz-7aa30821b" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-linkedin"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/emmagetz">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com">
+            Report a Bug
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions">Research Questions</a></li>
+  <li><a href="#loading-necessary-packages" id="toc-loading-necessary-packages" class="nav-link" data-scroll-target="#loading-necessary-packages">Loading Necessary Packages</a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data</a></li>
+  <li><a href="#data-structure-and-variables" id="toc-data-structure-and-variables" class="nav-link" data-scroll-target="#data-structure-and-variables">Data Structure and Variables</a></li>
+  <li><a href="#tidying-data" id="toc-tidying-data" class="nav-link" data-scroll-target="#tidying-data">Tidying Data</a>
+  <ul class="collapse">
+  <li><a href="#renaming-variables" id="toc-renaming-variables" class="nav-link" data-scroll-target="#renaming-variables">Renaming Variables</a></li>
+  <li><a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data">Reshaping Data</a></li>
+  </ul></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#research-question-1-in-2021-which-countries-had-the-highest-and-lowest-maternal-mortality-rates" id="toc-research-question-1-in-2021-which-countries-had-the-highest-and-lowest-maternal-mortality-rates" class="nav-link" data-scroll-target="#research-question-1-in-2021-which-countries-had-the-highest-and-lowest-maternal-mortality-rates">Research Question 1: In 2021, which countries had the highest and lowest maternal mortality rates?</a></li>
+  <li><a href="#research-question-2-in-2021-was-there-a-coorelation-between-a-countrys-human-development-index-rating-and-its-maternal-mortality-ratio" id="toc-research-question-2-in-2021-was-there-a-coorelation-between-a-countrys-human-development-index-rating-and-its-maternal-mortality-ratio" class="nav-link" data-scroll-target="#research-question-2-in-2021-was-there-a-coorelation-between-a-countrys-human-development-index-rating-and-its-maternal-mortality-ratio">Research Question 2: In 2021, was there a coorelation between a country’s Human Development Index rating and its maternal mortality ratio?</a></li>
+  <li><a href="#research-question-3-how-do-maternal-mortality-rates-vary-across-continents-and-how-have-these-variations-changed-over-time" id="toc-research-question-3-how-do-maternal-mortality-rates-vary-across-continents-and-how-have-these-variations-changed-over-time" class="nav-link" data-scroll-target="#research-question-3-how-do-maternal-mortality-rates-vary-across-continents-and-how-have-these-variations-changed-over-time">Research Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?</a></li>
+  <li><a href="#research-question-4-how-do-maternal-mortality-rates-vary-across-human-development-groups-and-how-have-these-variations-changed-over-time" id="toc-research-question-4-how-do-maternal-mortality-rates-vary-across-human-development-groups-and-how-have-these-variations-changed-over-time" class="nav-link" data-scroll-target="#research-question-4-how-do-maternal-mortality-rates-vary-across-human-development-groups-and-how-have-these-variations-changed-over-time">Research Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?</a></li>
+  <li><a href="#question-5-how-has-the-maternal-mortality-rate-in-the-united-states-changed-over-time" id="toc-question-5-how-has-the-maternal-mortality-rate-in-the-united-states-changed-over-time" class="nav-link" data-scroll-target="#question-5-how-has-the-maternal-mortality-rate-in-the-united-states-changed-over-time">Question 5: How has the maternal mortality rate in the United States changed over time?</a></li>
+  <li><a href="#question-6-how-does-the-maternal-mortality-rate-in-the-united-states-compare-to-that-of-other-highly-developed-countries" id="toc-question-6-how-does-the-maternal-mortality-rate-in-the-united-states-compare-to-that-of-other-highly-developed-countries" class="nav-link" data-scroll-target="#question-6-how-does-the-maternal-mortality-rate-in-the-united-states-compare-to-that-of-other-highly-developed-countries">Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyzing Global Trends in Maternal Mortality</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Emma Getz </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.appstate.edu/">
+            Appalachian State University
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Last modified on December 10, 2024 09:35:32 Eastern Standard Time</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <p>This analysis examines maternal mortality data from 1990 to 2021.</p>
+  </div>
+</div>
+
+</header>
+
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>According to the <a href="https://www.who.int/news-room/fact-sheets/detail/maternal-mortality">World Health Organization</a>, maternal mortality refers to deaths due to complications during pregnancy and childbirth. Maternal mortality rate (the number of maternal deaths per 100,000 live births) is a critical indicator of the strength of a country’s healthcare system. High maternal mortality rates are often due to disparities in access to quality healthcare, particularly in low- and middle-income countries. Reducing maternal mortality is essential for improving women’s health. It’s critical to understand trends in maternal mortality data globally to identify disparities, understand trends, and inform future public health research and policy.</p>
+</section>
+<section id="research-questions" class="level1">
+<h1>Research Questions</h1>
+<p>To guide my analysis, I developed research questions aimed at understanding the trends and factors behind maternal mortality rates across different countries and years.</p>
+<p>Question 1: In 2021, which countries had the highest and lowest maternal mortality rates?</p>
+<p>Question 2: In 2021, was there a relationship between a country’s Human Development Index rating and its maternal mortality ratio?</p>
+<p>Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?</p>
+<p>Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?</p>
+<p>Question 5: How has the maternal mortality rate in the United States changed across time?</p>
+<p>Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?</p>
+<p>Question 7: What was the global maternal mortality rate in 2021? How has this rate changed since 1990?</p>
+<p>Let’s get started!</p>
+</section>
+<section id="loading-necessary-packages" class="level1">
+<h1>Loading Necessary Packages</h1>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For data manipulation and tidying</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># For data visualizations</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-data" class="level1">
+<h1>Importing Data</h1>
+<p>The data for this project was downloaded from <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/maternal-mortality-dataset/data">Kaggle</a>. This project contains one data set which was imported and inspected using the <code>read.csv()</code> function.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>maternalmortality <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"MaternalMortalityCSV.csv"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-structure-and-variables" class="level1">
+<h1>Data Structure and Variables</h1>
+<p>Let’s take a look at the dataset.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 195
+Columns: 39
+$ ISO3                                                             &lt;chr&gt; "AFG"…
+$ Country                                                          &lt;chr&gt; "Afgh…
+$ Continent                                                        &lt;chr&gt; "Asia…
+$ Hemisphere                                                       &lt;chr&gt; "Nort…
+$ Human.Development.Groups                                         &lt;chr&gt; "Low"…
+$ UNDP.Developeing.Regions                                         &lt;chr&gt; "SA",…
+$ HDI.Rank..2021.                                                  &lt;int&gt; 180, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1990. &lt;int&gt; 1500,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1991. &lt;int&gt; 1530,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1992. &lt;int&gt; 1520,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1993. &lt;int&gt; 1480,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1994. &lt;int&gt; 1540,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1995. &lt;int&gt; 1490,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1996. &lt;int&gt; 1440,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1997. &lt;int&gt; 1470,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1998. &lt;int&gt; 1410,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1999. &lt;int&gt; 1470,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2000. &lt;int&gt; 1450,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2001. &lt;int&gt; 1390,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2002. &lt;int&gt; 1300,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2003. &lt;int&gt; 1240,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2004. &lt;int&gt; 1180,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2005. &lt;int&gt; 1140,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2006. &lt;int&gt; 1120,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2007. &lt;int&gt; 1090,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2008. &lt;int&gt; 1030,…
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2009. &lt;int&gt; 993, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2010. &lt;int&gt; 954, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2011. &lt;int&gt; 905, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2012. &lt;int&gt; 858, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2013. &lt;int&gt; 810, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2014. &lt;int&gt; 786, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2015. &lt;int&gt; 701, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2016. &lt;int&gt; 673, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2017. &lt;int&gt; 638, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2018. &lt;int&gt; 638, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2019. &lt;int&gt; 638, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2020. &lt;int&gt; 638, …
+$ Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2021. &lt;int&gt; 638, …</code></pre>
+</div>
+</div>
+<p>The <code>maternalmortality</code> dataframe contains 39 variables (columns) and 195 observations (rows), where each row corresponds to a country.</p>
+<p>The 39 variables are:</p>
+<ol type="1">
+<li><p><code>ISO3</code>: The three-letter country code from <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a>, the international standard for country codes.</p></li>
+<li><p><code>Country</code>: The name of the Country/Territory.</p></li>
+<li><p><code>Continent</code>: The Continent where the Country/Territory is located.</p></li>
+<li><p><code>Hemisphere</code>: The Hemisphere (Northern or Southern) where the Country/Territory is located.</p></li>
+<li><p><code>Human.Development.Groups</code>: The <a href="https://worldpopulationreview.com/country-rankings/hdi-by-country">Human Development Index (HDI)</a> is a measure compiled by the United Nations Development Programme to assess a country’s average achievements in health, education, and standard of living. In this dataset, countries are categorized into four tiers based on their HDI: Very High, High, Medium, and Low.</p></li>
+<li><p><code>UNDP.Developing.Regions</code>: The classification of countries into developing regions by the <a href="https://www.undp.org/">United Nations Development Programme (UNDP)</a>. These regions include East Asia and Pacific (EAP), Europe and Central Asia (ECA), Latin America and the Caribbean (LAC), Middle East and North Africa (MNA), South Asia (SAS), and Sub-Saharan Africa (SSA).</p></li>
+<li><p><code>HDI.Rank..2021</code>: The ranking of countries based on their <a href="https://hdr.undp.org/data-center/human-development-index#/indicies/HDI">Human Development Index (HDI)</a> values, with 1 being the highest-ranked country. This rank reflects a country’s relative position in terms of human development compared to others.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1990</code>: The maternal mortality ratio (MMR) in 1990, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1991</code>: The maternal mortality ratio (MMR) in 1991, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1992</code>: The maternal mortality ratio (MMR) in 1992, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1993</code>: The maternal mortality ratio (MMR) in 1993, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1994</code>: The maternal mortality ratio (MMR) in 1994, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1995</code>: The maternal mortality ratio (MMR) in 1995, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1996</code>: The maternal mortality ratio (MMR) in 1996, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1997</code>: The maternal mortality ratio (MMR) in 1997, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1998</code>: The maternal mortality ratio (MMR) in 1998, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1999</code>: The maternal mortality ratio (MMR) in 1999, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2000</code>: The maternal mortality ratio (MMR) in 2000, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2001</code>: The maternal mortality ratio (MMR) in 2001, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2002</code>: The maternal mortality ratio (MMR) in 2002, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2003</code>: The maternal mortality ratio (MMR) in 2003, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2004</code>: The maternal mortality ratio (MMR) in 2004, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2005</code>: The maternal mortality ratio (MMR) in 2005, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2006</code>: The maternal mortality ratio (MMR) in 2006, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2007</code>: The maternal mortality ratio (MMR) in 2007, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2008</code>: The maternal mortality ratio (MMR) in 2008, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2009</code>: The maternal mortality ratio (MMR) in 2009, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2010</code>: The maternal mortality ratio (MMR) in 2010, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2011</code>: The maternal mortality ratio (MMR) in 2011, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2012</code>: The maternal mortality ratio (MMR) in 2012, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2013</code>: The maternal mortality ratio (MMR) in 2013, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2014</code>: The maternal mortality ratio (MMR) in 2014, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2015</code>: The maternal mortality ratio (MMR) in 2015, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2016</code>: The maternal mortality ratio (MMR) in 2016, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2017</code>: The maternal mortality ratio (MMR) in 2017, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2018</code>: The maternal mortality ratio (MMR) in 2018, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2019</code>: The maternal mortality ratio (MMR) in 2019, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2020</code>: The maternal mortality ratio (MMR) in 2020, measured as the number of maternal deaths per 100,000 live births.</p></li>
+<li><p><code>Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2021</code>: The maternal mortality ratio (MMR) in 2021, measured as the number of maternal deaths per 100,000 live births.</p></li>
+</ol>
+</section>
+<section id="tidying-data" class="level1">
+<h1>Tidying Data</h1>
+<p>After exploring the dataset and its variables, I want to tidy the data by renaming some of the columns and restructuring the dataframe.</p>
+<section id="renaming-variables" class="level3">
+<h3 class="anchored" data-anchor-id="renaming-variables">Renaming Variables</h3>
+<p>The purpose of renaming variables is to make the dataset more understandable and easier to work wth. After doing this, I will view the updated column names.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"UNDP.Developeing.Regions"</span>] <span class="ot">&lt;-</span> <span class="st">"UNDP.Developing.Regions"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"HDI.Rank..2021."</span>] <span class="ot">&lt;-</span> <span class="st">"HDI_2021"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1990."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1990"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1991."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1991"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1992."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1992"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1993."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1993"</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1994."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1994"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1995."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1995"</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1996."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1996"</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1997."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1997"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1998."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1998"</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...1999."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_1999"</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2000."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2000"</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2001."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2001"</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2002."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2002"</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2003."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2003"</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2004."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2004"</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2005."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2005"</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2006."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2006"</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2007."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2007"</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2008."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2008"</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2009."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2009"</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2010."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2010"</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2011."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2011"</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2012."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2012"</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2013."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2013"</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2014."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2014"</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2015."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2015"</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2016."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2016"</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2017."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2017"</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2018."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2018"</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2019."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2019"</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2020."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2020"</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)[<span class="fu">colnames</span>(maternalmortality) <span class="sc">==</span> <span class="st">"Maternal.Mortality.Ratio..deaths.per.100.000.live.births...2021."</span>] <span class="ot">&lt;-</span> <span class="st">"MMR_2021"</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(maternalmortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ISO3"                     "Country"                 
+ [3] "Continent"                "Hemisphere"              
+ [5] "Human.Development.Groups" "UNDP.Developing.Regions" 
+ [7] "HDI_2021"                 "MMR_1990"                
+ [9] "MMR_1991"                 "MMR_1992"                
+[11] "MMR_1993"                 "MMR_1994"                
+[13] "MMR_1995"                 "MMR_1996"                
+[15] "MMR_1997"                 "MMR_1998"                
+[17] "MMR_1999"                 "MMR_2000"                
+[19] "MMR_2001"                 "MMR_2002"                
+[21] "MMR_2003"                 "MMR_2004"                
+[23] "MMR_2005"                 "MMR_2006"                
+[25] "MMR_2007"                 "MMR_2008"                
+[27] "MMR_2009"                 "MMR_2010"                
+[29] "MMR_2011"                 "MMR_2012"                
+[31] "MMR_2013"                 "MMR_2014"                
+[33] "MMR_2015"                 "MMR_2016"                
+[35] "MMR_2017"                 "MMR_2018"                
+[37] "MMR_2019"                 "MMR_2020"                
+[39] "MMR_2021"                </code></pre>
+</div>
+</div>
+</section>
+<section id="reshaping-data" class="level3">
+<h3 class="anchored" data-anchor-id="reshaping-data">Reshaping Data</h3>
+<p>Instead of having one entry per country with separate columns for each year, I want to transform the dataset to have one entry per country per year. This will make it easier to analyze relationships in the data and create visualizations. I will do this by changing the dataframe from “wide format” to “long format” using the <code>pivot_longer()</code> function from the <code>tidyr</code> package. I will also convert <code>Year</code> to a numeric variable using <code>str_extract()</code> from <code>stringr</code> package and <code>mutate()</code> from the <code>dplyr</code> package.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>maternalmortality_long <span class="ot">&lt;-</span> maternalmortality <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"MMR_"</span>), </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Year"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"MMR"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>maternalmortality_long <span class="ot">&lt;-</span> maternalmortality_long <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">as.numeric</span>(<span class="fu">str_extract</span>(Year, <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s view the restructured dataframe.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(maternalmortality_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 6,240
+Columns: 9
+$ ISO3                     &lt;chr&gt; "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "AF…
+$ Country                  &lt;chr&gt; "Afghanistan", "Afghanistan", "Afghanistan", …
+$ Continent                &lt;chr&gt; "Asia", "Asia", "Asia", "Asia", "Asia", "Asia…
+$ Hemisphere               &lt;chr&gt; "Northern Hemisphere", "Northern Hemisphere",…
+$ Human.Development.Groups &lt;chr&gt; "Low", "Low", "Low", "Low", "Low", "Low", "Lo…
+$ UNDP.Developing.Regions  &lt;chr&gt; "SA", "SA", "SA", "SA", "SA", "SA", "SA", "SA…
+$ HDI_2021                 &lt;int&gt; 180, 180, 180, 180, 180, 180, 180, 180, 180, …
+$ Year                     &lt;dbl&gt; 1990, 1991, 1992, 1993, 1994, 1995, 1996, 199…
+$ MMR                      &lt;int&gt; 1500, 1530, 1520, 1480, 1540, 1490, 1440, 147…</code></pre>
+</div>
+</div>
+<p>Great! Now I’m ready to begin analyzing the data and answering my research questions.</p>
+</section>
+</section>
+<section id="data-analysis" class="level1">
+<h1>Data Analysis</h1>
+<section id="research-question-1-in-2021-which-countries-had-the-highest-and-lowest-maternal-mortality-rates" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-1-in-2021-which-countries-had-the-highest-and-lowest-maternal-mortality-rates">Research Question 1: In 2021, which countries had the highest and lowest maternal mortality rates?</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>maternalmortality_long_2021 <span class="ot">&lt;-</span> maternalmortality_long <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2021</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>highest_MMR_countries_2021 <span class="ot">&lt;-</span> maternalmortality_long_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(MMR)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(highest_MMR_countries_2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 9
+  ISO3  Country                  Continent Hemisphere     Human.Development.Gr…¹
+  &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;                 
+1 SSD   South Sudan              Africa    Northern Hemi… Low                   
+2 TCD   Chad                     Africa    Northern Hemi… Low                   
+3 SLE   Sierra Leone             Africa    Northern Hemi… Low                   
+4 NGA   Nigeria                  Africa    Northern Hemi… Low                   
+5 CAF   Central African Republic Africa    Northern Hemi… Low                   
+# ℹ abbreviated name: ¹​Human.Development.Groups
+# ℹ 4 more variables: UNDP.Developing.Regions &lt;chr&gt;, HDI_2021 &lt;int&gt;,
+#   Year &lt;dbl&gt;, MMR &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>This shows us that South Sudan, Chad, Sierra Leone, Nigeria, and the Central African Republic had the highest MMR in 2021. Below is a bar chart showing these countries and their corresponding MMR values.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="maternalmortality_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lowest_MMR_countries_2021 <span class="ot">&lt;-</span> maternalmortality_long_2021 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(MMR) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lowest_MMR_countries_2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 9
+  ISO3  Country              Continent Hemisphere         Human.Development.Gr…¹
+  &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt;     &lt;chr&gt;              &lt;chr&gt;                 
+1 BLR   Belarus              Europe    Northern Hemisphe… Very High             
+2 ITA   Italy                Europe    Northern Hemisphe… Very High             
+3 NOR   Norway               Europe    Northern Hemisphe… Very High             
+4 POL   Poland               Europe    Northern Hemisphe… Very High             
+5 ARE   United Arab Emirates Asia      Northern Hemisphe… Very High             
+# ℹ abbreviated name: ¹​Human.Development.Groups
+# ℹ 4 more variables: UNDP.Developing.Regions &lt;chr&gt;, HDI_2021 &lt;int&gt;,
+#   Year &lt;dbl&gt;, MMR &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>This shows us that Belarus, Italy, Norway, Poland, and the United Arab Emirates had the lowest MMR in 2021. Below is a bar chart showing these countries and their corresponding MMR values.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="maternalmortality_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The countries with the highest MMR in 2021 were South Sudan, Chad, Sierra Leone, Nigeria, and the Central African Republic. South Sudan was the highest, with Chad following close behind. The countries with the lowest MMR in 2021 were Belarus, Italy, Norway, Poland, and the United Arab Emirates. Belarus, Italy, Norway, and Poland were tied for lowest, all with a MMR of 2.</p>
+</section>
+<section id="research-question-2-in-2021-was-there-a-coorelation-between-a-countrys-human-development-index-rating-and-its-maternal-mortality-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-2-in-2021-was-there-a-coorelation-between-a-countrys-human-development-index-rating-and-its-maternal-mortality-ratio">Research Question 2: In 2021, was there a coorelation between a country’s Human Development Index rating and its maternal mortality ratio?</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="maternalmortality_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This graph shows that there is a positive coorelation between a country’s Human Development Index rank and Maternal Mortality Rate in 2021. Specifically, the trend shoes that as a HDI rank increases (indicating less development), MMR also gets higher. The line of best fit emphasizes this trend, suggesting that less developed countries face a higher burden of maternal mortality.</p>
+</section>
+<section id="research-question-3-how-do-maternal-mortality-rates-vary-across-continents-and-how-have-these-variations-changed-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-3-how-do-maternal-mortality-rates-vary-across-continents-and-how-have-these-variations-changed-over-time">Research Question 3: How do maternal mortality rates vary across continents, and how have these variations changed over time?</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="maternalmortality_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This graph shows a correlation between continents and maternal mortality rates. Africa consistently has the highest MMR throughout the time period, while Europe consistently maintains the lowest. The other continents (America, Asia, and Oceania) fall in the mid-range, with their MMRs fluctuating but generally remaining lower than Africa’s and higher than Europe’s.</p>
+<p>Over time, all continents show a downward trend in maternal mortality rates. Africa’s MMR has significantly decreased and Europe’s MMR has slowly decreased. The Americas, Asia, and Oceania have all also experienced a steady decrease in MMR. All continents have seen a leveling-off in recent years.</p>
+</section>
+<section id="research-question-4-how-do-maternal-mortality-rates-vary-across-human-development-groups-and-how-have-these-variations-changed-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-4-how-do-maternal-mortality-rates-vary-across-human-development-groups-and-how-have-these-variations-changed-over-time">Research Question 4: How do maternal mortality rates vary across Human Development Groups, and how have these variations changed over time?</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="maternalmortality_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This graph shows that there is a clear correlation between a country’s maternal mortality rate and the Human Development Group it’s in. Countries in the “Very High” HDG maintain the lowest rates for the whole time period, followed by countries in the “High” HDG. Countries in the “Low” HDG show the highest MMR’s over the whole time period, followed by countries in the “Medium” HDG. These results suggest that countries with higher levels of development tend to have lower maternal mortality rates and less developed countries tend to have higher maternal mortality rates.</p>
+<p>The graph shows an overall downward trend in maternal mortality rates over time across all Human Development Groups. There are variations in the levels of change between HDG’s. While the “Very High” and “High” groups stay generally stable with a slow decrease. The “Medium” group sees a larger rate of decline, and the “Low” group sees the largest rate of decline. The most significant changes, observed in the “Low” group, show a decrease in maternal mortality rates by approximately 500 from 1990 to 2021. Additionally, all HDG groups see a leveling off towards the end of the time period.</p>
+</section>
+<section id="question-5-how-has-the-maternal-mortality-rate-in-the-united-states-changed-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="question-5-how-has-the-maternal-mortality-rate-in-the-united-states-changed-over-time">Question 5: How has the maternal mortality rate in the United States changed over time?</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="maternalmortality_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This graph shows that since 1990, the maternal mortality rate in the United States has been increasing. It started at 11 in 1990 and by 2016, it had increased to 19, which is where it stayed until 2021.</p>
+</section>
+<section id="question-6-how-does-the-maternal-mortality-rate-in-the-united-states-compare-to-that-of-other-highly-developed-countries" class="level3">
+<h3 class="anchored" data-anchor-id="question-6-how-does-the-maternal-mortality-rate-in-the-united-states-compare-to-that-of-other-highly-developed-countries">Question 6: How does the maternal mortality rate in the United States compare to that of other highly developed countries?</h3>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>https://argoshare.is.ed.ac.uk/healthyr_book/reshaping-data-long-vs-wide-format.html</p>
+<p>https://quarto.org/docs/authoring/markdown-basics.html</p>
+<p>https://www.who.int/news-room/fact-sheets/detail/maternal-mortality</p>
+<p>https://www.iso.org/iso-3166-country-codes.html</p>
+<p>https://worldpopulationreview.com/country-rankings/hdi-by-country</p>
+<p>https://www.undp.org/</p>
+<p>https://hdr.undp.org/data-center/human-development-index#/indicies/HDI</p>
+<p>https://ggplot2.tidyverse.org/reference/ggtheme.html</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
