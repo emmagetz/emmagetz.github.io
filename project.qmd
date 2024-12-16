@@ -3,7 +3,7 @@ title: "Projects"
 ---
 
 ### Academic Research Projects
-* [Departmental Honors Project Thesis Prospectus](./files/thesisprospectus)
+* [Departmental Honors Project Thesis Prospectus](./files/thesisprospectus.pdf)
 * [Data Analysis using R - Analyzing Global Trends in Maternal Mortality](./mm/maternalmortality.qmd)
 * [Epidemiology Honors Report - Alcohol Consumption Trends Among Adults in the United States and, D.C.](./files/PH4200honors.pdf)
 * [Data Analysis using Stats IQ - Impact of Student Employment on Extracurricular Engagement](./files/3330FinalPosterGetz.pdf)
@@ -12,7 +12,7 @@ title: "Projects"
 * [After-Action Report Template for Hurricane Helene](./files/AAR.pdf)
 * [Homelessness Calendar -  Hospitality House](https://www.canva.com/design/DAF2CpuL6vA/QM2BphMKItOvaENTzcwzvw/view?utm_content=DAF2CpuL6vA&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel)
 * [Sexual Violence Campaign Communications Infographic](https://www.canva.com/design/DAGCmkSDvUo/jdVqgywZFtncj_PrlBKtzA/view?utm_content=DAGCmkSDvUo&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel)
-* [Maternal Health Intervention Plan - Maternal Exercise Program to Coosa County](Plan3800.pdf)
+* [Maternal Health Intervention Plan - Maternal Exercise Program to Coosa County](./files/Plan3800.pdf)
 
 ### Extracurricular Projects 
 * [The Appalachian Portfolio - Graphics](https://theappalachianonline.com/staff_name/emma-getz/)
