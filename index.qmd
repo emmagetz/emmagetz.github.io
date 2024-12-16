@@ -1,14 +1,60 @@
 ---
-title: "Welcome to my website!"
+title: "Welcome!"
 ---
 
-![Emma](./photos/picofemma.jpg){width=150}
+<div style="display: flex; align-items: center;">
+  <img src="./photos/picofemma.jpg" alt="Emma" style="width:150px; margin-right: 20px;">
+  <div>
 
 
+I’m a senior at Appalachian State University majoring in Public Health with minors in Mathematics and Statistics. My passions include biostatistics, data-driven public health research, and community involvement.
 
-* To learn more about [Appalachian State University](https://www.appstate.edu/).
+Explore my work here: 
 
-* To learn more about [Public Health](https://www.appstate.edu/academics/majors/id/public-health).
+  * [About Me](./about.qmd)
+  
+  * [Projects](.project.qmd)
 
+  </div>
+</div>
 
 ![](./photos/bchslogo.png){width=500}
+
+<footer>
+  <p><strong>I'd love to hear from you!</strong></p>
+  <p>Email me at <span id="email">getzeg@appstate.edu</span>
+  |
+  Or connect on <a href="https://www.linkedin.com/in/emma-getz-7aa30821b" target="_blank">LinkedIn</a></p>
+  
+  <script>
+    document.getElementById("email").addEventListener("click", function() {
+      const email = document.getElementById("email").textContent;
+      navigator.clipboard.writeText(email).then(() => {
+        alert("Email copied to clipboard!");
+      });
+    });
+  </script>
+</footer>
+
+<style>
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+  }
+
+  #email, footer a {
+    color: black; /* Set both email and LinkedIn link color to black */
+    text-decoration: underline; /* Keep the underline */
+    cursor: pointer;
+  }
+
+  footer p {
+    margin: 0;
+  }
+</style>

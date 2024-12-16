@@ -1,6 +1,14 @@
 ---
 title: "Recources"
 ---
+Click below to learn more about Appalachian State's Public Health program and Department of Mathematical Sciences. 
+
+* [Appalachian State University](https://www.appstate.edu/).
+
+  * [BS in Public Health](https://www.appstate.edu/academics/majors/id/public-health)
+  
+  * [Department of Mathematical Sciences](https://mathsci.appstate.edu/)
+
 Check out these interesting resources related to public health. 
 
 * [CDC](https://www.cdc.gov/index.html)

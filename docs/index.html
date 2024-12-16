@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Emma Getz - Welcome to my website!</title>
+<title>Emma Getz - Welcome!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to my website!</h1>
+<h1 class="title">Welcome!</h1>
 </div>
 
 
@@ -148,17 +148,56 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./photos/picofemma.jpg" class="img-fluid figure-img" width="150"></p>
-<figcaption class="figure-caption">Emma</figcaption>
-</figure>
-</div>
+<div style="display: flex; align-items: center;">
+<img src="./photos/picofemma.jpg" alt="Emma" style="width:150px; margin-right: 20px;">
+<div>
+<p>I’m a senior at Appalachian State University majoring in Public Health with minors in Mathematics and Statistics. My passions include biostatistics, data-driven public health research, and community involvement.</p>
+<p>Explore my work here:</p>
 <ul>
-<li><p>To learn more about <a href="https://www.appstate.edu/">Appalachian State University</a>.</p></li>
-<li><p>To learn more about <a href="https://www.appstate.edu/academics/majors/id/public-health">Public Health</a>.</p></li>
+<li><p><a href="./about.html">About Me</a></p></li>
+<li><p><a href=".project.qmd">Projects</a></p></li>
 </ul>
+</div>
+</div>
 <p><img src="./photos/bchslogo.png" class="img-fluid" width="500"></p>
+<footer>
+<p>
+<strong>I’d love to hear from you!</strong>
+</p>
+<p>
+Email me at <span id="email">getzeg@appstate.edu</span> | Or connect on <a href="https://www.linkedin.com/in/emma-getz-7aa30821b" target="_blank">LinkedIn</a>
+</p>
+<script>
+    document.getElementById("email").addEventListener("click", function() {
+      const email = document.getElementById("email").textContent;
+      navigator.clipboard.writeText(email).then(() => {
+        alert("Email copied to clipboard!");
+      });
+    });
+  </script>
+</footer>
+<style>
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+  }
+
+  #email, footer a {
+    color: black; /* Set both email and LinkedIn link color to black */
+    text-decoration: underline; /* Keep the underline */
+    cursor: pointer;
+  }
+
+  footer p {
+    margin: 0;
+  }
+</style>
 
 
 
