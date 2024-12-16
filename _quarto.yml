@@ -17,8 +17,6 @@ website:
         href: 
       - icon: github
         href: https://github.com/emmagetz/emmagetz.github.io
-      - icon: linkedin
-        href: https://www.linkedin.com/in/emma-getz-7aa30821b
     
         menu:
           - text: Source Code
