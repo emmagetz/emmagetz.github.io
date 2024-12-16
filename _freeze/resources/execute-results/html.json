@@ -1,8 +1,10 @@
 {
-  "hash": "bbdf31978713b3467cf38f135cf73c4f",
+  "hash": "76b2d589e76b6cb5bf9aecc5a6458e76",
   "result": {
-    "markdown": "---\ntitle: \"Recources\"\n---\n\nClick below to learn more about Appalachian State's Public Health program and Department of Mathematical Sciences. \n\n* [Appalachian State University](https://www.appstate.edu/).\n\n  * [BS in Public Health](https://www.appstate.edu/academics/majors/id/public-health)\n  \n  * [Department of Mathematical Sciences](https://mathsci.appstate.edu/)\n\nCheck out these interesting resources related to public health. \n\n* [CDC](https://www.cdc.gov/index.html)\n\n* [WHO](https://www.who.int/)\n\n* [American Public Health Association](https://www.apha.org/)\n\n* [Appalachian Trail Conservancy - Health!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/health/)\n\n* [Appalachian Trail Conservancy - Ticks!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/safety/ticks/)\n\n\n::: {.cell}\n\n:::\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Recources\"\n---\n\nClick below to learn more about Appalachian State's Public Health program and Department of Mathematical Sciences. \n\n* [Appalachian State University](https://www.appstate.edu/).\n\n  * [BS in Public Health](https://www.appstate.edu/academics/majors/id/public-health)\n  \n  * [Department of Mathematical Sciences](https://mathsci.appstate.edu/)\n\nCheck out these great resources related to public health. \n\n* [CDC](https://www.cdc.gov/index.html)\n\n* [WHO](https://www.who.int/)\n\n* [American Public Health Association](https://www.apha.org/)\n\n* [Appalachian Trail Conservancy - Health!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/health/)\n\n* [Appalachian Trail Conservancy - Ticks!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/safety/ticks/)\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "resources_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
