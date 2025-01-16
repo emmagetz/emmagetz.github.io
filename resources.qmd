@@ -21,7 +21,5 @@ Check out these great resources related to public health.
 
 * [Appalachian Trail Conservancy - Ticks!](https://appalachiantrail.org/explore/plan-and-prepare/hiking-basics/safety/ticks/)
 
-```{r}
 
-```
 

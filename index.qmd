@@ -13,7 +13,7 @@ Explore my work here:
 
   * [About Me](./about.qmd)
   
-  * [Projects](.project.qmd)
+  * [Projects](./project.qmd)
 
   </div>
 </div>
